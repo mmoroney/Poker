@@ -31,6 +31,13 @@ namespace Framework {
         public override string ToString() =>
             String.Format("{0}{1}", "23456789TJQKA"[Convert.ToInt32(this.Rank)], "cdhs"[Convert.ToInt32(this.Suit)]);
 
+        public int ToInt() {
+            int rank = Convert.ToInt32(this.Rank);
+            int suit = Convert.ToInt32(this.Suit);
+
+            return 4 * rank + suit;
+        }
+
         public override bool Equals(object? obj) {
             if (obj is not Card card)
                 return false;

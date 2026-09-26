@@ -13,7 +13,7 @@ namespace FrameworkTest {
 
                 if (hand1 == hand2) {
                     for (int i = 0; i < 5; i++)
-                        Assert.AreEqual(hand1.cards[i].Rank, hand2.cards[i].Rank);
+                        Assert.AreEqual(hand1.Cards()[i].Rank, hand2.Cards()[i].Rank);
                 }
                 else if (hand1 > hand2)
                     TestLowComparison(hand1, hand2);
@@ -24,11 +24,13 @@ namespace FrameworkTest {
         }
 
         private static void TestLowComparison(LowHand stronger, LowHand weaker) {
-            for (int i = 0; i < 5; i++) {
-                if (stronger.cards[i].Rank == weaker.cards[i].Rank)
+            for (int i = 4; i >= 0; i--) {
+                Card[] strongerCards = stronger.Cards();
+                Card[] weakerCards = weaker.Cards();
+                if (strongerCards[i].Rank == weakerCards[i].Rank)
                     continue;
 
-                Assert.IsTrue(stronger.cards[i].Rank.LowComparable() < weaker.cards[i].Rank.LowComparable());
+                Assert.IsTrue(stronger.Cards()[i].Rank.LowComparable() < weaker.Cards()[i].Rank.LowComparable());
                 return;
             }
 

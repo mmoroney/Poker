@@ -3,7 +3,7 @@
         public static int Encode(int[] arr) {
             int code = 0;
             for (int i = 0; i < arr.Length; i++) {
-                code += Choose(arr[i] + i, i + 1);
+                code += Choose(arr[i], i + 1);
             }
             return code;
         }
@@ -12,11 +12,11 @@
             int[] arr = new int[length];
             for (int i = length - 1; i >= 0; i--) {
                 int j = 0;
-                while (Choose(j + i, i + 1) <= code) {
+                while (Choose(j, i + 1) <= code) {
                     j++;
                 }
                 arr[i] = j - 1;
-                code -= Choose(arr[i] + i, i + 1);
+                code -= Choose(j - 1, i + 1);
             }
             return arr;
         }
