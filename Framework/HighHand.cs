@@ -93,29 +93,24 @@ namespace Framework {
         }
 
         public static HighHand Build(Card[] cards) {
-            return Build(Array.ConvertAll(cards, c => c.ToInt()));
-        }
-
-        public static HighHand Build(int[] cards) {
             if (cards.Length != 5) {
                 throw new ArgumentException("There must be exactly 5 cards.", nameof(cards));
             }
 
-            Dictionary<int, int> histogram = new();
-            int overallSuit = cards[0] % 4;
+            Dictionary<Rank, int> histogram = new();
+            Suit firstSuit = cards[0].Suit;
+            bool isFlush = true;
 
             for (int i = 0; i < cards.Length; i++) {
-                int rank = cards[i] / 4;
-                int suit = cards[i] % 4;
-                if (overallSuit != suit)
-                    overallSuit = -1;
+                Rank rank = cards[i].Rank;
                 if (!histogram.TryGetValue(rank, out int count))
                     count = 0;
-
                 histogram[rank] = ++count;
+
+                isFlush &= cards[i].Suit == firstSuit;
             }
 
-            int[] sorted = new int[histogram.Count];
+            Rank[] sorted = new Rank[histogram.Count];
             Array.Copy(histogram.Keys.ToArray(), 0, sorted, 0, histogram.Count);
             Array.Sort(sorted, (a, b) => {
                 int count1 = histogram[a];
@@ -123,15 +118,14 @@ namespace Framework {
                 if (count1 != count2)
                     return count2.CompareTo(count1);
 
-                return b.CompareTo(a);
+                return b.Value.CompareTo(a.Value);
             });
 
             bool straight = IsStraight(sorted, histogram);
-            bool flush = overallSuit != -1;
 
             int handType = HIGH_CARD;
 
-            if (straight && flush) {
+            if (straight && isFlush) {
                 handType = STRAIGHT_FLUSH;
             }
             else if (histogram[sorted[0]] == 4) {
@@ -140,7 +134,7 @@ namespace Framework {
             else if (histogram[sorted[0]] == 3 && histogram[sorted[1]] == 2) {
                 handType = FULL_HOUSE;
             }
-            else if (flush) {
+            else if (isFlush) {
                 handType = FLUSH;
             }
             else if (straight) {
@@ -158,30 +152,30 @@ namespace Framework {
 
             int strength = handType << 20;
             if (straight) {
-                strength |= (sorted[0] == 12 && sorted[1] == 3) ? 3 : sorted[0];
+                strength |= (sorted[0].Value == 12 && sorted[1].Value == 3) ? 3 : sorted[0].Value;
             }
             else {
                 for (int i = 0; i < sorted.Length; i++) {
-                    strength |= sorted[i] << (4 * (4 - i));
+                    strength |= sorted[i].Value << (4 * (4 - i));
                 }
             }
 
-            return new HighHand(BijectiveMapping.Encode(cards), strength);
+            return new HighHand(BijectiveMapping.Encode(Array.ConvertAll<Card, int>(cards, r => r.Value)), strength);
         }
 
-        private static bool IsStraight(int[] cards, Dictionary<int, int> histogram) {
+        private static bool IsStraight(Rank[] ranks, Dictionary<Rank, int> histogram) {
             if (histogram.Count != 5)
                 return false;
 
-            if (cards[0] - cards[4] == 4)
+            if (ranks[0].Value - ranks[4].Value == 4)
                 return true;
 
-            if (cards[0] == 12 && cards[1] == 3) {
-                int ace = cards[0];
+            if (ranks[0].Value == 12 && ranks[1].Value == 3) {
+                Rank ace = ranks[0];
                 for (int i = 0; i < 4; i++)
-                    cards[i] = cards[i + 1];
+                    ranks[i] = ranks[i + 1];
 
-                cards[4] = ace;
+                ranks[4] = ace;
                 return true;
             }
 

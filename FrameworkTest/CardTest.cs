@@ -8,8 +8,8 @@ namespace FrameworkTest {
     public class CardTest {
         [TestMethod]
         public void TestEquality() {
-            int ranks = Enum.GetValues(typeof(Rank)).Length;
-            int suits = Enum.GetValues(typeof(Suit)).Length;
+            int ranks = Utilities.allRanks.Length;
+            int suits = Utilities.allSuits.Length;
 
             for (int i = 0; i < ranks * suits; i++) {
                 for (int j = 0; j < ranks * suits; j++) {
@@ -25,8 +25,8 @@ namespace FrameworkTest {
 
         [TestMethod]
         public void TestHashCode() {
-            int ranks = Enum.GetValues(typeof(Rank)).Length;
-            int suits = Enum.GetValues(typeof(Suit)).Length;
+            int ranks = Utilities.allRanks.Length;
+            int suits = Utilities.allSuits.Length;
 
             HashSet<Card> set = new();
 

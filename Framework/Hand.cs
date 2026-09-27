@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Framework {
+    [DebuggerDisplay("{ToString()}")]
     public abstract class Hand {
         public readonly Card[] cards;
 
@@ -16,7 +18,7 @@ namespace Framework {
             this.cards = cards;
         }
 
-        public override string ToString() => string.Join<Card>("", this.cards);
+        public override string ToString() => string.Join("", this.cards);
 
         public override int GetHashCode() {
             int hash = 0;

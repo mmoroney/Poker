@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Combinatorics;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Combinatorics;
 
 namespace Framework {
     [DebuggerDisplay("{ToString()}")]
@@ -65,44 +66,35 @@ namespace Framework {
         }
 
         public static LowHand? Build(Card[] cards) {
-            return Build(Array.ConvertAll(cards, c => c.ToInt()));
-        }
-
-        public static LowHand? Build(int[] cards) {
             if (cards.Length != 5)
                 throw new ArgumentException("cards parameter must have 5 values.", nameof(cards));
 
-            HashSet<int> ranks = new();
+            HashSet<Rank> ranks = new();
             int[] lowRanks = new int[cards.Length];
 
-            foreach (int card in cards) {
-                if (card < 0 || card > 51)
-                    throw new ArgumentOutOfRangeException(nameof(cards), "Card values must be between 0 and 51.");
-                int? rank = ToLowRank(card);
-                if (rank is null)
+            foreach (Card card in cards) {
+                Rank rank = card.Rank;
+                if (!rank.IsLowRank()) { 
                     return null;
+                }
 
-                int r = rank.Value;
-                if (ranks.Contains(r))
+                if (ranks.Contains(rank))
                     return null;        
 
-                ranks.Add(r);
-                lowRanks[ranks.Count - 1] = r;
+                ranks.Add(rank);
+                lowRanks[ranks.Count - 1] = ToLowIndex(rank);
             }
 
             Array.Sort(lowRanks);
-            
 
-            return new LowHand(BijectiveMapping.Encode(cards), BijectiveMapping.Encode(lowRanks));
+            return new LowHand(BijectiveMapping.Encode(Array.ConvertAll<Card, int>(cards, r => r.Value)), BijectiveMapping.Encode(lowRanks));
         }
 
-        private static int? ToLowRank(int card) {
-            int rank = card / 4;
-            if (rank == 12)
+        private static int ToLowIndex(Rank rank) {
+            if(rank.Value == 12)
                 return 0;
-            if (rank >= 8)
-                return null;
-            return rank;
+
+            return rank.Value + 1;
         }
     }
 }

@@ -63,74 +63,74 @@ namespace FrameworkTest
         [TestMethod]
         public void TestHands()
         {
-            TestHand(new Card(Rank.A, Suit.c),
-                new Card(Rank.K, Suit.c),
-                new Card(Rank.Q, Suit.c),
-                new Card(Rank.J, Suit.c),
-                new Card(Rank.T, Suit.c),
+            TestHand(new Card(Rank.ACE, Suit.CLUBS),
+                new Card(Rank.KING, Suit.CLUBS),
+                new Card(Rank.QUEEN, Suit.CLUBS),
+                new Card(Rank.JACK, Suit.CLUBS),
+                new Card(Rank.TEN, Suit.CLUBS),
                 HandType.StraightFlush);
 
-            TestHand(new Card(Rank.A, Suit.c),
-                new Card(Rank.A, Suit.d),
-                new Card(Rank.A, Suit.h),
-                new Card(Rank.A, Suit.s),
-                new Card(Rank.K, Suit.c),
+            TestHand(new Card(Rank.ACE, Suit.CLUBS),
+                new Card(Rank.ACE, Suit.DIAMONDS),
+                new Card(Rank.ACE, Suit.HEARTS),
+                new Card(Rank.ACE, Suit.SPADES),
+                new Card(Rank.KING, Suit.CLUBS),
                 HandType.FourOfAKind);
 
-            TestHand(new Card(Rank.A, Suit.c),
-                new Card(Rank.A, Suit.d),
-                new Card(Rank.A, Suit.h),
-                new Card(Rank.K, Suit.c),
-                new Card(Rank.K, Suit.d),
+            TestHand(new Card(Rank.ACE, Suit.CLUBS),
+                new Card(Rank.ACE, Suit.DIAMONDS),
+                new Card(Rank.ACE, Suit.HEARTS),
+                new Card(Rank.KING, Suit.CLUBS),
+                new Card(Rank.KING, Suit.DIAMONDS),
                 HandType.FullHouse);
 
-            TestHand(new Card(Rank.A, Suit.c),
-                new Card(Rank.K, Suit.c),
-                new Card(Rank.Q, Suit.c),
-                new Card(Rank.J, Suit.c),
-                new Card(Rank._9, Suit.c),
+            TestHand(new Card(Rank.ACE, Suit.CLUBS),
+                new Card(Rank.KING, Suit.CLUBS),
+                new Card(Rank.QUEEN, Suit.CLUBS),
+                new Card(Rank.JACK, Suit.CLUBS),
+                new Card(Rank.NINE, Suit.CLUBS),
                 HandType.Flush);
 
-            TestHand(new Card(Rank.A, Suit.c),
-                new Card(Rank.K, Suit.d),
-                new Card(Rank.Q, Suit.h),
-                new Card(Rank.J, Suit.s),
-                new Card(Rank.T, Suit.c),
+            TestHand(new Card(Rank.ACE, Suit.CLUBS),
+                new Card(Rank.KING, Suit.DIAMONDS),
+                new Card(Rank.QUEEN, Suit.HEARTS),
+                new Card(Rank.JACK, Suit.SPADES),
+                new Card(Rank.TEN, Suit.CLUBS),
                 HandType.Straight);
 
-            TestHand(new Card(Rank.A, Suit.c),
-                new Card(Rank._2, Suit.d),
-                new Card(Rank._3, Suit.h),
-                new Card(Rank._4, Suit.s),
-                new Card(Rank._5, Suit.c),
+            TestHand(new Card(Rank.ACE, Suit.CLUBS),
+                new Card(Rank.TWO, Suit.DIAMONDS),
+                new Card(Rank.THREE, Suit.HEARTS),
+                new Card(Rank.FOUR, Suit.SPADES),
+                new Card(Rank.FIVE, Suit.CLUBS),
                 HandType.Straight);
 
-            TestHand(new Card(Rank.A, Suit.c),
-                new Card(Rank.A, Suit.d),
-                new Card(Rank.A, Suit.h),
-                new Card(Rank.K, Suit.c),
-                new Card(Rank.Q, Suit.d),
+            TestHand(new Card(Rank.ACE, Suit.CLUBS),
+                new Card(Rank.ACE, Suit.DIAMONDS),
+                new Card(Rank.ACE, Suit.HEARTS),
+                new Card(Rank.KING, Suit.CLUBS),
+                new Card(Rank.QUEEN, Suit.DIAMONDS),
                 HandType.ThreeOfAKind);
 
-            TestHand(new Card(Rank.A, Suit.c),
-                new Card(Rank.A, Suit.d),
-                new Card(Rank.K, Suit.h),
-                new Card(Rank.K, Suit.c),
-                new Card(Rank.Q, Suit.d),
+            TestHand(new Card(Rank.ACE, Suit.CLUBS),
+                new Card(Rank.ACE, Suit.DIAMONDS),
+                new Card(Rank.KING, Suit.HEARTS),
+                new Card(Rank.KING, Suit.CLUBS),
+                new Card(Rank.QUEEN, Suit.DIAMONDS),
                 HandType.TwoPair);
 
-            TestHand(new Card(Rank.A, Suit.c),
-                new Card(Rank.A, Suit.d),
-                new Card(Rank.K, Suit.h),
-                new Card(Rank.Q, Suit.c),
-                new Card(Rank.J, Suit.d),
+            TestHand(new Card(Rank.ACE, Suit.CLUBS),
+                new Card(Rank.ACE, Suit.DIAMONDS),
+                new Card(Rank.KING, Suit.HEARTS),
+                new Card(Rank.QUEEN, Suit.CLUBS),
+                new Card(Rank.JACK, Suit.DIAMONDS),
                 HandType.OnePair);
 
-            TestHand(new Card(Rank.A, Suit.c),
-                new Card(Rank.K, Suit.h),
-                new Card(Rank.Q, Suit.c),
-                new Card(Rank.J, Suit.d),
-                new Card(Rank._9, Suit.d),
+            TestHand(new Card(Rank.ACE, Suit.CLUBS),
+                new Card(Rank.KING, Suit.HEARTS),
+                new Card(Rank.QUEEN, Suit.CLUBS),
+                new Card(Rank.JACK, Suit.DIAMONDS),
+                new Card(Rank.NINE, Suit.DIAMONDS),
                 HandType.HighCard);
         }
 
@@ -140,129 +140,129 @@ namespace FrameworkTest
             Card[] card1 = new Card[5];
             Card[] card2 = new Card[5];
 
-            card1[0] = new Card(Rank.A, Suit.c);
-            card1[1] = new Card(Rank.K, Suit.c);
-            card1[2] = new Card(Rank.Q, Suit.c);
-            card1[3] = new Card(Rank.J, Suit.c);
-            card1[4] = new Card(Rank.T, Suit.c);
+            card1[0] = new Card(Rank.ACE, Suit.CLUBS);
+            card1[1] = new Card(Rank.KING, Suit.CLUBS);
+            card1[2] = new Card(Rank.QUEEN, Suit.CLUBS);
+            card1[3] = new Card(Rank.JACK, Suit.CLUBS);
+            card1[4] = new Card(Rank.TEN, Suit.CLUBS);
 
-            card2[0] = new Card(Rank.K, Suit.d);
-            card2[1] = new Card(Rank.Q, Suit.d);
-            card2[2] = new Card(Rank.J, Suit.d);
-            card2[3] = new Card(Rank.T, Suit.d);
-            card2[4] = new Card(Rank._9, Suit.d);
-
-            TestUnequalHandComparison(card1, card2);
-
-            card1[0] = new Card(Rank.A, Suit.c);
-            card1[1] = new Card(Rank.A, Suit.d);
-            card1[2] = new Card(Rank.A, Suit.h);
-            card1[3] = new Card(Rank.A, Suit.s);
-            card1[4] = new Card(Rank.K, Suit.c);
-
-            card2[0] = new Card(Rank.Q, Suit.c);
-            card2[1] = new Card(Rank.Q, Suit.d);
-            card2[2] = new Card(Rank.Q, Suit.h);
-            card2[3] = new Card(Rank.Q, Suit.s);
-            card2[4] = new Card(Rank.J, Suit.c);
+            card2[0] = new Card(Rank.KING, Suit.DIAMONDS);
+            card2[1] = new Card(Rank.QUEEN, Suit.DIAMONDS);
+            card2[2] = new Card(Rank.JACK, Suit.DIAMONDS);
+            card2[3] = new Card(Rank.TEN, Suit.DIAMONDS);
+            card2[4] = new Card(Rank.NINE, Suit.DIAMONDS);
 
             TestUnequalHandComparison(card1, card2);
 
-            card1[0] = new Card(Rank.A, Suit.c);
-            card1[1] = new Card(Rank.A, Suit.d);
-            card1[2] = new Card(Rank.A, Suit.h);
-            card1[3] = new Card(Rank.K, Suit.s);
-            card1[4] = new Card(Rank.K, Suit.c);
+            card1[0] = new Card(Rank.ACE, Suit.CLUBS);
+            card1[1] = new Card(Rank.ACE, Suit.DIAMONDS);
+            card1[2] = new Card(Rank.ACE, Suit.HEARTS);
+            card1[3] = new Card(Rank.ACE, Suit.SPADES);
+            card1[4] = new Card(Rank.KING, Suit.CLUBS);
 
-            card2[0] = new Card(Rank.Q, Suit.c);
-            card2[1] = new Card(Rank.Q, Suit.d);
-            card2[2] = new Card(Rank.Q, Suit.h);
-            card2[3] = new Card(Rank.J, Suit.s);
-            card2[4] = new Card(Rank.J, Suit.c);
-
-            TestUnequalHandComparison(card1, card2);
-
-            card1[0] = new Card(Rank.A, Suit.c);
-            card1[1] = new Card(Rank.K, Suit.d);
-            card1[2] = new Card(Rank.Q, Suit.h);
-            card1[3] = new Card(Rank.J, Suit.s);
-            card1[4] = new Card(Rank._9, Suit.c);
-
-            card2[0] = new Card(Rank.A, Suit.c);
-            card2[1] = new Card(Rank.K, Suit.d);
-            card2[2] = new Card(Rank.Q, Suit.h);
-            card2[3] = new Card(Rank.J, Suit.s);
-            card2[4] = new Card(Rank._8, Suit.c);
+            card2[0] = new Card(Rank.QUEEN, Suit.CLUBS);
+            card2[1] = new Card(Rank.QUEEN, Suit.DIAMONDS);
+            card2[2] = new Card(Rank.QUEEN, Suit.HEARTS);
+            card2[3] = new Card(Rank.QUEEN, Suit.SPADES);
+            card2[4] = new Card(Rank.JACK, Suit.CLUBS);
 
             TestUnequalHandComparison(card1, card2);
 
-            card1[0] = new Card(Rank.A, Suit.c);
-            card1[1] = new Card(Rank.A, Suit.d);
-            card1[2] = new Card(Rank.A, Suit.h);
-            card1[3] = new Card(Rank.K, Suit.s);
-            card1[4] = new Card(Rank.Q, Suit.c);
+            card1[0] = new Card(Rank.ACE, Suit.CLUBS);
+            card1[1] = new Card(Rank.ACE, Suit.DIAMONDS);
+            card1[2] = new Card(Rank.ACE, Suit.HEARTS);
+            card1[3] = new Card(Rank.KING, Suit.SPADES);
+            card1[4] = new Card(Rank.KING, Suit.CLUBS);
 
-            card2[0] = new Card(Rank.J, Suit.c);
-            card2[1] = new Card(Rank.J, Suit.d);
-            card2[2] = new Card(Rank.J, Suit.h);
-            card2[3] = new Card(Rank.T, Suit.s);
-            card2[4] = new Card(Rank._9, Suit.c);
-
-            TestUnequalHandComparison(card1, card2);
-
-            card1[0] = new Card(Rank.A, Suit.c);
-            card1[1] = new Card(Rank.A, Suit.d);
-            card1[2] = new Card(Rank.A, Suit.h);
-            card1[3] = new Card(Rank.K, Suit.s);
-            card1[4] = new Card(Rank.Q, Suit.c);
-
-            card2[0] = new Card(Rank.J, Suit.c);
-            card2[1] = new Card(Rank.J, Suit.d);
-            card2[2] = new Card(Rank.J, Suit.h);
-            card2[3] = new Card(Rank.T, Suit.s);
-            card2[4] = new Card(Rank._9, Suit.c);
+            card2[0] = new Card(Rank.QUEEN, Suit.CLUBS);
+            card2[1] = new Card(Rank.QUEEN, Suit.DIAMONDS);
+            card2[2] = new Card(Rank.QUEEN, Suit.HEARTS);
+            card2[3] = new Card(Rank.JACK, Suit.SPADES);
+            card2[4] = new Card(Rank.JACK, Suit.CLUBS);
 
             TestUnequalHandComparison(card1, card2);
 
-            card1[0] = new Card(Rank.A, Suit.c);
-            card1[1] = new Card(Rank.A, Suit.d);
-            card1[2] = new Card(Rank.K, Suit.h);
-            card1[3] = new Card(Rank.K, Suit.s);
-            card1[4] = new Card(Rank.Q, Suit.c);
+            card1[0] = new Card(Rank.ACE, Suit.CLUBS);
+            card1[1] = new Card(Rank.KING, Suit.DIAMONDS);
+            card1[2] = new Card(Rank.QUEEN, Suit.HEARTS);
+            card1[3] = new Card(Rank.JACK, Suit.SPADES);
+            card1[4] = new Card(Rank.NINE, Suit.CLUBS);
 
-            card2[0] = new Card(Rank.J, Suit.c);
-            card2[1] = new Card(Rank.J, Suit.d);
-            card2[2] = new Card(Rank.T, Suit.h);
-            card2[3] = new Card(Rank.T, Suit.s);
-            card2[4] = new Card(Rank._9, Suit.c);
-
-            TestUnequalHandComparison(card1, card2);
-
-            card1[0] = new Card(Rank.A, Suit.c);
-            card1[1] = new Card(Rank.A, Suit.d);
-            card1[2] = new Card(Rank.K, Suit.h);
-            card1[3] = new Card(Rank.Q, Suit.s);
-            card1[4] = new Card(Rank.J, Suit.c);
-
-            card2[0] = new Card(Rank.J, Suit.c);
-            card2[1] = new Card(Rank.J, Suit.d);
-            card2[2] = new Card(Rank.T, Suit.h);
-            card2[3] = new Card(Rank._9, Suit.s);
-            card2[4] = new Card(Rank._8, Suit.c);
+            card2[0] = new Card(Rank.ACE, Suit.CLUBS);
+            card2[1] = new Card(Rank.KING, Suit.DIAMONDS);
+            card2[2] = new Card(Rank.QUEEN, Suit.HEARTS);
+            card2[3] = new Card(Rank.JACK, Suit.SPADES);
+            card2[4] = new Card(Rank.EIGHT, Suit.CLUBS);
 
             TestUnequalHandComparison(card1, card2);
 
-            card1[0] = new Card(Rank.A, Suit.c);
-            card1[1] = new Card(Rank.K, Suit.d);
-            card1[2] = new Card(Rank.Q, Suit.h);
-            card1[3] = new Card(Rank.J, Suit.s);
-            card1[4] = new Card(Rank._9, Suit.c);
+            card1[0] = new Card(Rank.ACE, Suit.CLUBS);
+            card1[1] = new Card(Rank.ACE, Suit.DIAMONDS);
+            card1[2] = new Card(Rank.ACE, Suit.HEARTS);
+            card1[3] = new Card(Rank.KING, Suit.SPADES);
+            card1[4] = new Card(Rank.QUEEN, Suit.CLUBS);
 
-            card2[0] = new Card(Rank._8, Suit.c);
-            card2[1] = new Card(Rank._7, Suit.d);
-            card2[2] = new Card(Rank._6, Suit.h);
-            card2[3] = new Card(Rank._5, Suit.s);
-            card2[4] = new Card(Rank._3, Suit.c);
+            card2[0] = new Card(Rank.JACK, Suit.CLUBS);
+            card2[1] = new Card(Rank.JACK, Suit.DIAMONDS);
+            card2[2] = new Card(Rank.JACK, Suit.HEARTS);
+            card2[3] = new Card(Rank.TEN, Suit.SPADES);
+            card2[4] = new Card(Rank.NINE, Suit.CLUBS);
+
+            TestUnequalHandComparison(card1, card2);
+
+            card1[0] = new Card(Rank.ACE, Suit.CLUBS);
+            card1[1] = new Card(Rank.ACE, Suit.DIAMONDS);
+            card1[2] = new Card(Rank.ACE, Suit.HEARTS);
+            card1[3] = new Card(Rank.KING, Suit.SPADES);
+            card1[4] = new Card(Rank.QUEEN, Suit.CLUBS);
+
+            card2[0] = new Card(Rank.JACK, Suit.CLUBS);
+            card2[1] = new Card(Rank.JACK, Suit.DIAMONDS);
+            card2[2] = new Card(Rank.JACK, Suit.HEARTS);
+            card2[3] = new Card(Rank.TEN, Suit.SPADES);
+            card2[4] = new Card(Rank.NINE, Suit.CLUBS);
+
+            TestUnequalHandComparison(card1, card2);
+
+            card1[0] = new Card(Rank.ACE, Suit.CLUBS);
+            card1[1] = new Card(Rank.ACE, Suit.DIAMONDS);
+            card1[2] = new Card(Rank.KING, Suit.HEARTS);
+            card1[3] = new Card(Rank.KING, Suit.SPADES);
+            card1[4] = new Card(Rank.QUEEN, Suit.CLUBS);
+
+            card2[0] = new Card(Rank.JACK, Suit.CLUBS);
+            card2[1] = new Card(Rank.JACK, Suit.DIAMONDS);
+            card2[2] = new Card(Rank.TEN, Suit.HEARTS);
+            card2[3] = new Card(Rank.TEN, Suit.SPADES);
+            card2[4] = new Card(Rank.NINE, Suit.CLUBS);
+
+            TestUnequalHandComparison(card1, card2);
+
+            card1[0] = new Card(Rank.ACE, Suit.CLUBS);
+            card1[1] = new Card(Rank.ACE, Suit.DIAMONDS);
+            card1[2] = new Card(Rank.KING, Suit.HEARTS);
+            card1[3] = new Card(Rank.QUEEN, Suit.SPADES);
+            card1[4] = new Card(Rank.JACK, Suit.CLUBS);
+
+            card2[0] = new Card(Rank.JACK, Suit.CLUBS);
+            card2[1] = new Card(Rank.JACK, Suit.DIAMONDS);
+            card2[2] = new Card(Rank.TEN, Suit.HEARTS);
+            card2[3] = new Card(Rank.NINE, Suit.SPADES);
+            card2[4] = new Card(Rank.EIGHT, Suit.CLUBS);
+
+            TestUnequalHandComparison(card1, card2);
+
+            card1[0] = new Card(Rank.ACE, Suit.CLUBS);
+            card1[1] = new Card(Rank.ACE, Suit.DIAMONDS);
+            card1[2] = new Card(Rank.KING, Suit.HEARTS);
+            card1[3] = new Card(Rank.JACK, Suit.SPADES);
+            card1[4] = new Card(Rank.NINE, Suit.CLUBS);
+
+            card2[0] = new Card(Rank.EIGHT, Suit.CLUBS);
+            card2[1] = new Card(Rank.SEVEN, Suit.DIAMONDS);
+            card2[2] = new Card(Rank.SIX, Suit.HEARTS);
+            card2[3] = new Card(Rank.FIVE, Suit.SPADES);
+            card2[4] = new Card(Rank.THREE, Suit.CLUBS);
 
             TestUnequalHandComparison(card1, card2);
         }

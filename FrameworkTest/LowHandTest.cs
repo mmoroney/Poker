@@ -12,8 +12,10 @@ namespace FrameworkTest {
                 LowHand hand2 = Utilities.MakeLowHand();
 
                 if (hand1 == hand2) {
+                    Card[] cards1 = hand1.Cards();
+                    Card[] cards2 = hand2.Cards();
                     for (int i = 0; i < 5; i++)
-                        Assert.AreEqual(hand1.Cards()[i].Rank, hand2.Cards()[i].Rank);
+                        Assert.AreEqual(cards1[i].Rank, cards2[i].Rank);
                 }
                 else if (hand1 > hand2)
                     TestLowComparison(hand1, hand2);

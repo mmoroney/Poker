@@ -7,76 +7,31 @@ using System.Diagnostics;
 
 namespace Framework {
     [DebuggerDisplay("{ToString()}")]
-    public class Card : IEquatable<Card> {
-        public Rank Rank { get; private set; }
-        public Suit Suit { get; private set; }
+    public readonly record struct Card(byte Value) {
 
-        public Card(Rank rank, Suit suit) {
-            this.Rank = rank;
-            this.Suit = suit;
-        }
-
-        public Card(int n) {
-            int ranks = Enum.GetValues(typeof(Rank)).Length;
-            int suits = Enum.GetValues(typeof(Suit)).Length;
-
-            if (n < 0 || n >= ranks * suits) {
-                throw new ArgumentOutOfRangeException(nameof(n));
+        public Card(int value) : this((byte)value) {
+            if (value < 0 || value > 51) {
+                throw new ArgumentOutOfRangeException(nameof(value), "Card value must be between 0 and 51.");
             }
-
-            this.Rank = (Rank)(n / suits);
-            this.Suit = (Suit)(n % suits);
         }
+
+        public Card(Rank rank, Suit suit) : this((byte)(4 * rank.Value + suit.Value)) {
+        }
+
+        public Rank Rank => new(Value / 4);
+        public Suit Suit => new(Value % 4);
 
         public override string ToString() =>
-            String.Format("{0}{1}", "23456789TJQKA"[Convert.ToInt32(this.Rank)], "cdhs"[Convert.ToInt32(this.Suit)]);
-
-        public int ToInt() {
-            int rank = Convert.ToInt32(this.Rank);
-            int suit = Convert.ToInt32(this.Suit);
-
-            return 4 * rank + suit;
-        }
-
-        public override bool Equals(object? obj) {
-            if (obj is not Card card)
-                return false;
-
-            return this == card;
-        }
-
-        public override int GetHashCode() {
-            return this.Rank.GetHashCode() ^ this.Suit.GetHashCode();
-        }
-
-        public bool Equals(Card? other) {
-            if (other is null)
-                return false;
-
-            return this == other;
-        }
-
-        public static bool operator ==(Card a, Card b) {
-            return a.Rank == b.Rank && a.Suit == b.Suit;
-        }
-
-        public static bool operator !=(Card a, Card b) {
-            return !(a == b);
-        }
+            String.Format("{0}{1}", Rank, Suit);
 
         public static Card Parse(string s) {
             if (s.Length != 2)
                 throw new ArgumentException(String.Format("The string must contain exactly two characters. String: {0}", s) ,nameof(s));
 
-            int i = "23456789TJQKA".IndexOf(s[0]);
-            if (i == -1)
-                throw new ArgumentException(String.Format("Unrecognized rank character: {0}", s[0]), nameof(s));
+            Rank rank = new("23456789TJQKA".IndexOf(s[0]));
+            Suit suit = new("cdhs".IndexOf(s[1]));
 
-            
-            Rank rank = (Rank)i;
-            Suit suit = (Suit)Enum.Parse(typeof(Suit), s.AsSpan(1));
-
-            return new Card(rank, suit);
+            return new(rank, suit);
         }
     }
 }
