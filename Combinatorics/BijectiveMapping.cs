@@ -1,6 +1,6 @@
 ﻿namespace Combinatorics {
     public class BijectiveMapping {
-        public static int Encode(int[] arr) {
+        public static int Encode(byte[] arr) {
             int code = 0;
             for (int i = 0; i < arr.Length; i++) {
                 code += Choose(arr[i], i + 1);
@@ -8,14 +8,14 @@
             return code;
         }
 
-        public static int[] Decode(int code, int length) {
-            int[] arr = new int[length];
+        public static byte[] Decode(int code, int length) {
+            byte[] arr = new byte[length];
             for (int i = length - 1; i >= 0; i--) {
                 int j = 0;
                 while (Choose(j, i + 1) <= code) {
                     j++;
                 }
-                arr[i] = j - 1;
+                arr[i] = (byte)(j - 1);
                 code -= Choose(j - 1, i + 1);
             }
             return arr;
@@ -31,6 +31,5 @@
             }
             return c;
         }   
-
     }
 }

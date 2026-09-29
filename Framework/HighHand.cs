@@ -32,12 +32,12 @@ namespace Framework {
         private const int FOUR_OF_A_KIND = 7;
         private const int STRAIGHT_FLUSH = 8;
 
-        internal static HighHand Min = new(-1, -1);
-        private readonly int index;
+        internal static HighHand Min = new(new(0), -1);
+        private readonly FiveCards cards;
         private readonly int strength;
 
-        private HighHand(int index, int strength) {
-            this.index = index;
+        private HighHand(FiveCards cards, int strength) {
+            this.cards = cards;
             this.strength = strength;
         }
 
@@ -89,25 +89,23 @@ namespace Framework {
         }
 
         public static HighHand Max(HighHand a, HighHand b) {
-            return b < a ? a : b;
+            return a.strength > b.strength ? a : b;
         }
 
-        public static HighHand Build(Card[] cards) {
-            if (cards.Length != 5) {
-                throw new ArgumentException("There must be exactly 5 cards.", nameof(cards));
-            }
+        public static HighHand Build(FiveCards cards) {
+            Card[] cardArray = cards.GetCards();
 
             Dictionary<Rank, int> histogram = new();
-            Suit firstSuit = cards[0].Suit;
+            Suit firstSuit = cardArray[0].Suit;
             bool isFlush = true;
 
-            for (int i = 0; i < cards.Length; i++) {
-                Rank rank = cards[i].Rank;
+            for (int i = 0; i < cardArray.Length; i++) {
+                Rank rank = cardArray[i].Rank;
                 if (!histogram.TryGetValue(rank, out int count))
                     count = 0;
                 histogram[rank] = ++count;
 
-                isFlush &= cards[i].Suit == firstSuit;
+                isFlush &= cardArray[i].Suit == firstSuit;
             }
 
             Rank[] sorted = new Rank[histogram.Count];
@@ -160,7 +158,7 @@ namespace Framework {
                 }
             }
 
-            return new HighHand(BijectiveMapping.Encode(Array.ConvertAll<Card, int>(cards, r => r.Value)), strength);
+            return new HighHand(cards, strength);
         }
 
         private static bool IsStraight(Rank[] ranks, Dictionary<Rank, int> histogram) {

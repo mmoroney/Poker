@@ -20,7 +20,7 @@ namespace Framework.Games
             Card[] dest = new Card[5];
 
             foreach (Card[] cards in Chooser.Choose(source, dest))
-                best = HighHand.Max(best, HighHand.Build(cards));
+                best = HighHand.Max(best, HighHand.Build(new FiveCards(cards)));
 
             return best;
         }

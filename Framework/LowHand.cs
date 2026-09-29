@@ -10,16 +10,15 @@ using System.Threading.Tasks;
 namespace Framework {
     [DebuggerDisplay("{ToString()}")]
     public class LowHand : IComparable<LowHand>, IEquatable<LowHand> {
-        private readonly int index;
+        private readonly FiveCards cards;
         private readonly int strength;
-        private LowHand(int index, int strength) {
-            this.index = index;
+        private LowHand(FiveCards cards, int strength) {
+            this.cards = cards;
             this.strength = strength;
         }
 
         public Card[] Cards() {
-            int[] decoded = BijectiveMapping.Decode(index, 5);
-            return Array.ConvertAll(decoded, card => new Card(card));
+            return cards.GetCards();
         }
 
         public int CompareTo(LowHand? other) {
@@ -65,14 +64,13 @@ namespace Framework {
             return b < a ? a : b;
         }
 
-        public static LowHand? Build(Card[] cards) {
-            if (cards.Length != 5)
-                throw new ArgumentException("cards parameter must have 5 values.", nameof(cards));
+        public static LowHand? Build(FiveCards cards) {
+            Card[] cardArray = cards.GetCards();
 
             HashSet<Rank> ranks = new();
-            int[] lowRanks = new int[cards.Length];
+            byte[] lowRanks = new byte[cardArray.Length];
 
-            foreach (Card card in cards) {
+            foreach (Card card in cardArray) {
                 Rank rank = card.Rank;
                 if (!rank.IsLowRank()) { 
                     return null;
@@ -87,14 +85,14 @@ namespace Framework {
 
             Array.Sort(lowRanks);
 
-            return new LowHand(BijectiveMapping.Encode(Array.ConvertAll<Card, int>(cards, r => r.Value)), BijectiveMapping.Encode(lowRanks));
+            return new LowHand(cards, BijectiveMapping.Encode(lowRanks));
         }
 
-        private static int ToLowIndex(Rank rank) {
+        private static byte ToLowIndex(Rank rank) {
             if(rank.Value == 12)
                 return 0;
 
-            return rank.Value + 1;
+            return (byte)(rank.Value + 1);
         }
     }
 }

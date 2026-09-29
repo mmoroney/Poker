@@ -26,12 +26,12 @@ namespace Framework.Games
         }
 
         private static IEnumerable<HighHand> GetHighHands(Card[] board, Card[] holeCards) {
-            return GetCards(board, holeCards).Select(cards => HighHand.Build(cards));
+            return GetCards(board, holeCards).Select(cards => HighHand.Build(new FiveCards(cards)));
         }
 
         private static IEnumerable<LowHand> GetLowHands(Card[] board, Card[] holeCards) {
             foreach (Card[] cards in GetCards(board, holeCards)) {
-                LowHand? hand = LowHand.Build(cards);
+                LowHand? hand = LowHand.Build(new FiveCards(cards));
                 if (hand is not null) {
                     yield return hand;
                 }

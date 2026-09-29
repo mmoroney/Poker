@@ -46,7 +46,7 @@ namespace FrameworkTest {
                 cards[i] = new Card(ranks[i - 1], ChooseRandom(allSuits));
             }
 
-            return HighHand.Build(cards);
+            return HighHand.Build(new FiveCards(cards));
         }
 
         public static HighHand MakeTwoPair() {
@@ -64,7 +64,7 @@ namespace FrameworkTest {
 
             cards[4] = new Card(ranks[2], ChooseRandom(allSuits));
 
-            return HighHand.Build(cards);
+            return HighHand.Build(new FiveCards(cards));
         }
 
         public static HighHand MakeThreeOfAKind() {
@@ -79,7 +79,7 @@ namespace FrameworkTest {
             cards[3] = new Card(ranks[1], ChooseRandom(allSuits));
             cards[4] = new Card(ranks[2], ChooseRandom(allSuits));
 
-            return HighHand.Build(cards);
+            return HighHand.Build(new FiveCards(cards));
         }
 
         public static HighHand MakeFullHouse() {
@@ -95,7 +95,7 @@ namespace FrameworkTest {
                 cards[i] = new Card(ranks[1], suits[i]);
             }
 
-            return HighHand.Build(cards);
+            return HighHand.Build(new FiveCards(cards));
         }
 
         public static HighHand MakeFourOfAKind() {
@@ -106,7 +106,7 @@ namespace FrameworkTest {
             }
 
             cards[4] = new Card(ranks[1], ChooseRandom(allSuits));
-            return HighHand.Build(cards);
+            return HighHand.Build(new FiveCards(cards));
         }
 
         public static HighHand MakeStraightFlush() {
@@ -122,7 +122,7 @@ namespace FrameworkTest {
                 cards[i] = new Card(new Rank(value), suit);
             }
 
-            return HighHand.Build(cards);
+            return HighHand.Build(new FiveCards(cards));
         }
 
         public static LowHand MakeLowHand() {
@@ -133,7 +133,7 @@ namespace FrameworkTest {
                 cards[i] = new Card(ranks[i], ChooseRandom(allSuits));
             }
 
-            LowHand? lowHand = LowHand.Build(cards);
+            LowHand? lowHand = LowHand.Build(new FiveCards(cards));
 
             if (lowHand is null) {
                 throw new InvalidOperationException();

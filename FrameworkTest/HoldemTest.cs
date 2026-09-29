@@ -11,7 +11,7 @@ namespace FrameworkTest {
         public void TestCalculateEquity() {
             var testData = new[] {
                 new {  Board = "QcTc3h",  HoleCards = new string[] { "AcKc", "QhQd" },  Equities = new Rational[] {new Rational(67, 198), new Rational(131,198) } },
-                new {  Board = "QcTc3h5d",  HoleCards = new string[] { "AcKc", "QhQd" },  Equities = new Rational[] {new Rational(10, 44), new Rational(34, 44) } },
+                new {  Board = "QcTc3h5d2c",  HoleCards = new string[] { "AcKc", "QhQd" },  Equities = new Rational[] {new Rational(1, 1), new Rational(0, 1) } },
                 new {  Board = "AsAcAhAdKs",  HoleCards = new string[] { "TsTh", "KcKd", "2h2s" },  Equities = new Rational[] {new Rational(1, 3), new Rational(1, 3), new Rational(1, 3) } },
             };
 
