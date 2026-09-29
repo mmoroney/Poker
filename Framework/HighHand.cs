@@ -8,54 +8,34 @@ using Combinatorics;
 using System.Runtime.ExceptionServices;
 
 namespace Framework {
-    public enum HandType {
-        HighCard = 0,
-        OnePair = 1,
-        TwoPair = 2,
-        ThreeOfAKind = 3,
-        Straight = 4,
-        Flush = 5,
-        FullHouse = 6,
-        FourOfAKind = 7,
-        StraightFlush = 8
-    }
-
     [DebuggerDisplay("{ToString()}")]
     public class HighHand : IComparable<HighHand>, IEquatable<HighHand> {
-        private const int HIGH_CARD = 0;
-        private const int ONE_PAIR = 1;
-        private const int TWO_PAIR = 2;
-        private const int THREE_OF_A_KIND = 3;
-        private const int STRAIGHT = 4;
-        private const int FLUSH = 5;
-        private const int FULL_HOUSE = 6;
-        private const int FOUR_OF_A_KIND = 7;
-        private const int STRAIGHT_FLUSH = 8;
+        private static readonly Card[] MIN_HAND = new Card[5] {
+            new(Rank.TWO, Suit.CLUBS),
+            new(Rank.THREE, Suit.CLUBS),
+            new(Rank.FOUR, Suit.CLUBS),
+            new(Rank.FIVE, Suit.CLUBS),
+            new(Rank.SEVEN, Suit.DIAMONDS)
+        };
 
-        internal static HighHand Min = new(new(0), -1);
-        private readonly FiveCards cards;
-        private readonly int strength;
+        internal static HighHand Min = Build(new FiveCards(MIN_HAND));
+        public FiveCards Cards { get; private set; }
+        public HandStrength Strength { get; private set; }
 
-        private HighHand(FiveCards cards, int strength) {
-            this.cards = cards;
-            this.strength = strength;
-        }
-
-        public HandType HandType {
-            get {
-                return (HandType)(strength >> 20);
-            }
+        private HighHand(FiveCards cards, HandStrength strength) {
+            Cards = cards;
+            Strength = strength;
         }
 
         public override int GetHashCode() {
-            return strength;
+            return Strength.GetHashCode();
         }
 
         public int CompareTo(HighHand? other) {
             if (other is null)
                 throw new ArgumentNullException(nameof(other));
 
-            return strength.CompareTo(other.strength);
+            return Strength.Value.CompareTo(other.Strength.Value);
         }
 
         public override bool Equals(object? obj) {
@@ -89,7 +69,7 @@ namespace Framework {
         }
 
         public static HighHand Max(HighHand a, HighHand b) {
-            return a.strength > b.strength ? a : b;
+            return a.Strength.Value > b.Strength.Value ? a : b;
         }
 
         public static HighHand Build(FiveCards cards) {
@@ -121,44 +101,43 @@ namespace Framework {
 
             bool straight = IsStraight(sorted, histogram);
 
-            int handType = HIGH_CARD;
+            HandType handType = HandType.HighCard;
 
             if (straight && isFlush) {
-                handType = STRAIGHT_FLUSH;
+                handType = HandType.StraightFlush;
             }
             else if (histogram[sorted[0]] == 4) {
-                handType = FOUR_OF_A_KIND;
+                handType = HandType.FourOfAKind;
             }
             else if (histogram[sorted[0]] == 3 && histogram[sorted[1]] == 2) {
-                handType = FULL_HOUSE;
+                handType = HandType.FullHouse;
             }
             else if (isFlush) {
-                handType = FLUSH;
+                handType = HandType.Flush;
             }
             else if (straight) {
-                handType = STRAIGHT;
+                handType = HandType.Straight;
             }
             else if (histogram[sorted[0]] == 3) {
-                handType = THREE_OF_A_KIND;
+                handType = HandType.ThreeOfAKind;
             }
             else if (histogram[sorted[0]] == 2 && histogram[sorted[1]] == 2) {
-                handType = TWO_PAIR;
+                handType = HandType.TwoPair;
             }
             else if (histogram[sorted[0]] == 2) {
-                handType = ONE_PAIR;
+                handType = HandType.OnePair;
             }
 
-            int strength = handType << 20;
-            if (straight) {
-                strength |= (sorted[0].Value == 12 && sorted[1].Value == 3) ? 3 : sorted[0].Value;
-            }
-            else {
-                for (int i = 0; i < sorted.Length; i++) {
-                    strength |= sorted[i].Value << (4 * (4 - i));
-                }
+            if (straight && sorted[0].Value == Rank.ACE.Value && sorted[1].Value == Rank.FIVE.Value) {
+                sorted = new Rank[] { Rank.FIVE, Rank.FOUR, Rank.THREE, Rank.TWO, Rank.ACE };
             }
 
-            return new HighHand(cards, strength);
+            int strength = handType.Value << 20;
+            for (int i = 0; i < sorted.Length; i++) {
+                strength |= sorted[i].Value << (4 * (4 - i));
+            }
+
+            return new HighHand(cards, new HandStrength(strength));
         }
 
         private static bool IsStraight(Rank[] ranks, Dictionary<Rank, int> histogram) {

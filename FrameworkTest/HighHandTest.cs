@@ -27,10 +27,10 @@ namespace FrameworkTest
                     for (int j = i + 1; j < types.Length; j++)
                     {
                         HighHand hand1 = MakeHighHand(types[i]);
-                        Assert.AreEqual(types[i], hand1.HandType);
+                        Assert.AreEqual(types[i], hand1.Strength.HandType);
 
                         HighHand hand2 = MakeHighHand(types[j]);
-                        Assert.AreEqual(types[j], hand2.HandType);
+                        Assert.AreEqual(types[j], hand2.Strength.HandType);
 
                         Assert.IsTrue(hand2 > hand1);
                     }
@@ -40,23 +40,14 @@ namespace FrameworkTest
 
         private static HighHand MakeHighHand(HandType type)
         {
-            switch (type)
-            {
-                case HandType.OnePair:
-                    return Utilities.MakeOnePair();
-                case HandType.TwoPair:
-                    return Utilities.MakeTwoPair();
-                case HandType.ThreeOfAKind:
-                    return Utilities.MakeThreeOfAKind();
-                case HandType.FullHouse:
-                    return Utilities.MakeFullHouse();
-                case HandType.FourOfAKind:
-                    return Utilities.MakeFourOfAKind();
-                case HandType.StraightFlush:
-                    return Utilities.MakeStraightFlush();
-                default:
-                    throw new ArgumentException("Unsupported type", nameof(type));
-            }
+            if (type == HandType.OnePair) return Utilities.MakeOnePair();
+            if (type == HandType.TwoPair) return Utilities.MakeTwoPair();
+            if (type == HandType.ThreeOfAKind) return Utilities.MakeThreeOfAKind();
+            if (type == HandType.FullHouse) return Utilities.MakeFullHouse();
+            if (type == HandType.FourOfAKind) return Utilities.MakeFourOfAKind();
+            if (type == HandType.StraightFlush) return Utilities.MakeStraightFlush();
+
+            throw new ArgumentException("Unsupported type", nameof(type));
         }
 
 
@@ -270,7 +261,7 @@ namespace FrameworkTest
         private static void TestHand(Card card1, Card card2, Card card3, Card card4, Card card5, HandType handType)
         {
             HighHand hand = HighHand.Build(new FiveCards(new Card[] { card1, card2, card3, card4, card5 }));
-            Assert.AreEqual(handType, hand.HandType);
+            Assert.AreEqual(handType, hand.Strength.HandType);
         }
 
         private static void TestUnequalHandComparison(Card[] hand1, Card[] hand2)
