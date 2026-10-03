@@ -21,7 +21,7 @@
             return arr;
         }
 
-        private static int Choose(int n, int k) {
+        public static int Choose(int n, int k) {
             if (k < 0 || k > n) return 0;
             if (k == 0 || k == n) return 1;
             k = Math.Min(k, n - k); // Take advantage of symmetry

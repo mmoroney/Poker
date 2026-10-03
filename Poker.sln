@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Combinatorics", "Combinator
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Combinatorics.Tests", "Combinatorics.Tests\Combinatorics.Tests.csproj", "{37BD4C41-FB74-4F96-8363-FB6E57DA3A1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateFiveCard", "GenerateFiveCard\GenerateFiveCard.csproj", "{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{37BD4C41-FB74-4F96-8363-FB6E57DA3A1E}.Release|x64.Build.0 = Release|Any CPU
 		{37BD4C41-FB74-4F96-8363-FB6E57DA3A1E}.Release|x86.ActiveCfg = Release|Any CPU
 		{37BD4C41-FB74-4F96-8363-FB6E57DA3A1E}.Release|x86.Build.0 = Release|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Debug|x64.Build.0 = Debug|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Debug|x86.Build.0 = Debug|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Release|x64.ActiveCfg = Release|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Release|x64.Build.0 = Release|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Release|x86.ActiveCfg = Release|Any CPU
+		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

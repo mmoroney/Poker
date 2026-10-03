@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GenerateFiveCard": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\MikeM\\source\\repos\\Poker\\Framework\\Data\\five_card.dat"
+    }
+  }
+}

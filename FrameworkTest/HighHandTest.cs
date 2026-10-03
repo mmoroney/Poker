@@ -27,10 +27,10 @@ namespace FrameworkTest
                     for (int j = i + 1; j < types.Length; j++)
                     {
                         HighHand hand1 = MakeHighHand(types[i]);
-                        Assert.AreEqual(types[i], hand1.Strength.HandType);
+                        Assert.AreEqual(types[i], hand1.HandType);
 
                         HighHand hand2 = MakeHighHand(types[j]);
-                        Assert.AreEqual(types[j], hand2.Strength.HandType);
+                        Assert.AreEqual(types[j], hand2.HandType);
 
                         Assert.IsTrue(hand2 > hand1);
                     }
@@ -261,7 +261,7 @@ namespace FrameworkTest
         private static void TestHand(Card card1, Card card2, Card card3, Card card4, Card card5, HandType handType)
         {
             HighHand hand = HighHand.Build(new FiveCards(new Card[] { card1, card2, card3, card4, card5 }));
-            Assert.AreEqual(handType, hand.Strength.HandType);
+            Assert.AreEqual(handType, hand.HandType);
         }
 
         private static void TestUnequalHandComparison(Card[] hand1, Card[] hand2)
