@@ -48,7 +48,7 @@ namespace Framework {
                 if (Strength < 1277) {
                     return HandType.HighCard;
                 }
-                if (Strength < 4138) {
+                if (Strength < 4137) {
                     return HandType.OnePair;
                 }
                 if (Strength < 4995) {
