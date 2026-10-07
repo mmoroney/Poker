@@ -20,7 +20,7 @@ for (int i = 0; i < n; i++) {
     byte[] combo = BijectiveMapping.Decode(i, 5);
     Card[] cards = Array.ConvertAll(combo, c => new Card(c));
     FiveCards five = new(cards);
-    HandStrength strength = Encoder.Encode(five);
+    HandStrength strength = GenerateFiveCard.Encoder.Encode(five);
     strengths[i] = (i, strength.Value, strength.ToString());
     if (i % 100000 == 0) {
         Console.WriteLine($"Processed {i} hands");
