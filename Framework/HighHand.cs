@@ -20,7 +20,7 @@ namespace Framework {
         };
 
         // table of strengths loaded from embedded resource Data/five_card.dat
-        private static readonly ushort[] FiveCardTable;
+        public static readonly ushort[] FiveCardTable;
 
         static HighHand()
         {
@@ -41,39 +41,15 @@ namespace Framework {
 
         internal static HighHand Min;
         public FiveCards Cards { get; private set; }
-        public int Strength { get; private set; }
+        public ushort Strength { get; private set; }
 
         public HandType HandType {
             get {
-                if (Strength < 1277) {
-                    return HandType.HighCard;
-                }
-                if (Strength < 4137) {
-                    return HandType.OnePair;
-                }
-                if (Strength < 4995) {
-                    return HandType.TwoPair;
-                }
-                if (Strength < 5853) {
-                    return HandType.ThreeOfAKind;
-                }
-                if (Strength < 5863) {
-                    return HandType.Straight;
-                }
-                if (Strength < 7140) {
-                    return HandType.Flush;
-                }
-                if (Strength < 7296) {
-                    return HandType.FullHouse;
-                }
-                if (Strength < 7452) {
-                    return HandType.FourOfAKind;
-                }
-                return HandType.StraightFlush;
+                return Decoder.Decode(Strength).HandType;
             }
         }
 
-        private HighHand(FiveCards cards, int strength) {
+        private HighHand(FiveCards cards, ushort strength) {
             Cards = cards;
             Strength = strength;
         }
@@ -121,14 +97,14 @@ namespace Framework {
 
         public static HighHand Max(HighHand a, HighHand b) {
             return a.Strength > b.Strength ? a : b;
-        }
+        } 
 
-        public static int LookupStrength(FiveCards cards) {
+        public static ushort LookupStrength(FiveCards cards) {
             return FiveCardTable[cards.Value];
         }
 
         public static HighHand Build(FiveCards cards) {
-            int strength = LookupStrength(cards);
+            ushort strength = LookupStrength(cards);
             return new HighHand(cards, strength);
         }
     }

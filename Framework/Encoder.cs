@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Framework {
     public static class Encoder {
-        public static int Encode(FiveCards cards) {
+        public static ushort Encode(FiveCards cards) {
             Card[] cardArray = cards.GetCards();
             Dictionary<Rank, int> histogram = new();
             Suit firstSuit = cardArray[0].Suit;
