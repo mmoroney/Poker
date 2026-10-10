@@ -39,11 +39,9 @@ namespace Framework.Games
         }
 
         private static IEnumerable<Card[]> GetCards(Card[] fullBoard, Card[] holeCards) {
-            Card[] dest = new Card[5];
-
-            foreach (Card[] result in Chooser.Choose(fullBoard, 0, dest, 0, 3)) {
-                foreach (Card[] result2 in Chooser.Choose(holeCards, 0, dest, 3, 2)) {
-                    yield return result2;
+            foreach (Card[] result in Chooser.Choose(fullBoard, 3)) {
+                foreach (Card[] result2 in Chooser.Choose(holeCards, 2)) {
+                    yield return result.Concat(result2).ToArray();
                 }
             }
         }

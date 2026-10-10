@@ -12,11 +12,9 @@ namespace Framework.Games {
                 .Select(_ => Rational.Zero)
                 .ToArray();
 
-            Card[] board = new Card[5];
-            partialBoard.CopyTo(board, 0);
             int count = 0;
 
-            foreach (Card[] fullBoard in Chooser.Choose(deck, 0, board, partialBoard.Length, 5 - partialBoard.Length)) {
+            foreach (Card[] fullBoard in GetFullBoards(deck, partialBoard)) {
                 count++;
                 Rational[] result = GetWinsHigh(fullBoard, holeCards, makeHand);
                 for (int i = 0; i < result.Length; i++)
@@ -36,7 +34,7 @@ namespace Framework.Games {
             partialBoard.CopyTo(board, 0);
             int count = 0;
 
-            foreach (Card[] fullBoard in Chooser.Choose(deck, 0, board, partialBoard.Length, 5 - partialBoard.Length)) {
+            foreach (Card[] fullBoard in GetFullBoards(deck, partialBoard)) {
                 count++;
                 Rational[] highResult = GetWinsHigh(fullBoard, holeCards, OmahaShared.MakeHighHand);
                 Rational[]? lowResult = GetWinsLow(fullBoard, holeCards);
@@ -46,6 +44,12 @@ namespace Framework.Games {
             }
 
             return wins.Select(i => i / count).ToArray();
+        }
+
+        private static IEnumerable<Card[]> GetFullBoards(Card[] deck, Card[] partialBoard) {
+            foreach (Card[] fullBoard in Chooser.Choose(deck, 5 - partialBoard.Length)) {
+                yield return partialBoard.Concat(fullBoard).ToArray();
+            }
         }
 
         private static Rational[] GetWinsHigh(Card[] fullBoard, Card[][] holeCards, Func<Card[], Card[], ushort> makeHand) {

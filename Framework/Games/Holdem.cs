@@ -17,9 +17,7 @@ namespace Framework.Games
             ushort best = 0;
 
             Card[] source = board.Concat(holeCards).ToArray();
-            Card[] dest = new Card[5];
-
-            foreach (Card[] cards in Chooser.Choose(source, dest))
+            foreach (Card[] cards in Chooser.Choose(source, 5))
                 best = Math.Max(best, LookupTable.Lookup(new FiveCards(cards)));
 
             return best;
