@@ -79,10 +79,10 @@ namespace Framework.Games {
 
         private static Rational[]? GetWinsLow(Card[] fullBoard, Card[][] holeCards) {
             HashSet<int> winners = new();
-            LowHand? bestLow = null;
+            byte? bestLow = null;
 
             for (int i = 0; i < holeCards.Length; i++) {
-                LowHand? currentHand = OmahaShared.MakeLowHand(fullBoard, holeCards[i]);
+                byte? currentHand = OmahaShared.MakeLowHand(fullBoard, holeCards[i]);
                 if (currentHand is null)
                     continue;
 

@@ -8,31 +8,29 @@ namespace FrameworkTest {
         [TestMethod]
         public void TestLowHandComparison() {
             for (int n = 0; n < 100; n++) {
-                LowHand hand1 = Utilities.MakeLowHand();
-                LowHand hand2 = Utilities.MakeLowHand();
+                byte hand1 = Utilities.MakeLowHand();
+                byte hand2 = Utilities.MakeLowHand();
+                Rank[] ranks1 = Framework.Decoder.DecodeLow(hand1);
+                Rank[] ranks2 = Framework.Decoder.DecodeLow(hand2);
 
                 if (hand1 == hand2) {
-                    Card[] cards1 = hand1.Cards();
-                    Card[] cards2 = hand2.Cards();
                     for (int i = 0; i < 5; i++)
-                        Assert.AreEqual(cards1[i].Rank, cards2[i].Rank);
+                        Assert.AreEqual(ranks1[i], ranks2[i]);
                 }
                 else if (hand1 > hand2)
-                    TestLowComparison(hand1, hand2);
+                    TestLowComparison(ranks2, ranks1);
 
                 else
-                    TestLowComparison(hand2, hand1);
+                    TestLowComparison(ranks1, ranks2);
             }
         }
 
-        private static void TestLowComparison(LowHand stronger, LowHand weaker) {
+        private static void TestLowComparison(Rank[] stronger, Rank[] weaker) {
             for (int i = 4; i >= 0; i--) {
-                Card[] strongerCards = stronger.Cards();
-                Card[] weakerCards = weaker.Cards();
-                if (strongerCards[i].Rank == weakerCards[i].Rank)
+                if (stronger[i] == weaker[i])
                     continue;
 
-                Assert.IsTrue(stronger.Cards()[i].Rank.LowComparable() < weaker.Cards()[i].Rank.LowComparable());
+                Assert.IsTrue(stronger[i].LowComparable() < weaker[i].LowComparable());
                 return;
             }
 

@@ -75,6 +75,30 @@ namespace Framework {
             return (ushort)(handType.Value << 12 | encodedRanks);
         }
 
+        public static byte? EncodeLow(FiveCards cards) {
+            Card[] cardArray = cards.GetCards();
+
+            HashSet<Rank> ranks = new();
+            byte[] lowRanks = new byte[cardArray.Length];
+
+            foreach (Card card in cardArray) {
+                Rank rank = card.Rank;
+                if (!rank.IsLowRank()) {
+                    return null;
+                }
+
+                if (ranks.Contains(rank))
+                    return null;
+
+                ranks.Add(rank);
+                lowRanks[ranks.Count - 1] = ToLowIndex(rank);
+            }
+
+            Array.Sort(lowRanks);
+
+            return (byte)BijectiveMapping.Encode(lowRanks);
+        }
+
         private static bool IsStraight(Rank[] sorted, Dictionary<Rank, int> histogram) {
             if (histogram.Count != 5) {
                 return false;
@@ -124,6 +148,12 @@ namespace Framework {
             byte[] values = Array.ConvertAll(sorted, r => r.Value);
             Array.Reverse(values);
             return (ushort)BijectiveMapping.Encode(values);
+        }
+        private static byte ToLowIndex(Rank rank) {
+            if (rank.Value == 12)
+                return 0;
+
+            return (byte)(rank.Value + 1);
         }
     }
 }

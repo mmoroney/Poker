@@ -16,11 +16,11 @@ namespace Framework.Games
             return best;
         }
 
-        public static LowHand? MakeLowHand(Card[] board, Card[] holeCards) {
-            LowHand? bestLow = null;
+        public static byte? MakeLowHand(Card[] board, Card[] holeCards) {
+            byte? bestLow = null;
 
-            foreach (LowHand hand in GetLowHands(board, holeCards))
-                bestLow = (bestLow is null) ? hand : LowHand.Max(bestLow, hand);
+            foreach (byte hand in GetLowHands(board, holeCards))
+                bestLow = (bestLow is null) ? hand : Math.Max((byte)bestLow, hand);
 
             return bestLow;
         }
@@ -29,11 +29,11 @@ namespace Framework.Games
             return GetCards(board, holeCards).Select(cards => LookupTable.Lookup(new FiveCards(cards)));
         }
 
-        private static IEnumerable<LowHand> GetLowHands(Card[] board, Card[] holeCards) {
+        private static IEnumerable<byte> GetLowHands(Card[] board, Card[] holeCards) {
             foreach (Card[] cards in GetCards(board, holeCards)) {
-                LowHand? hand = LowHand.Build(new FiveCards(cards));
+                byte? hand = Encoder.EncodeLow(new FiveCards(cards));
                 if (hand is not null) {
-                    yield return hand;
+                    yield return (byte)hand;
                 }
             }
         }

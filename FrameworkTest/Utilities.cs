@@ -125,7 +125,7 @@ namespace FrameworkTest {
             return LookupTable.Lookup(new FiveCards(cards));
         }
 
-        public static LowHand MakeLowHand() {
+        public static byte MakeLowHand() {
             Rank[] ranks = ChooseRandom(lowRanks, 5);
             Card[] cards = new Card[5];
 
@@ -133,13 +133,9 @@ namespace FrameworkTest {
                 cards[i] = new Card(ranks[i], ChooseRandom(allSuits));
             }
 
-            LowHand? lowHand = LowHand.Build(new FiveCards(cards));
+            byte? lowHand = Framework.Encoder.EncodeLow(new FiveCards(cards));
 
-            if (lowHand is null) {
-                throw new InvalidOperationException();
-            }
-
-            return lowHand;
+            return lowHand ?? throw new InvalidOperationException();
         }
 
         public static T ChooseRandom<T>(T[] values) {

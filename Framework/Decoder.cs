@@ -91,6 +91,7 @@ namespace Framework {
             ranks[4] = new Rank { Value = kickerRank };
             return ranks;
         }
+
         private static Rank[] DecodeOnePair(ushort encoded, Rank[] ranks) {
             byte pairRank = (byte)((encoded >> 8) & 0xF);
             int code = encoded & 0xFF;
@@ -108,6 +109,7 @@ namespace Framework {
             ranks[4] = new Rank { Value = kickers[0] };
             return ranks;
         }
+
         private static Rank[] DecodeHighCard(ushort encoded, Rank[] ranks) {
             // encoded low 12 bits contain the bijective mapping code for the five ranks
             int code = encoded & 0xFFF;
@@ -115,6 +117,22 @@ namespace Framework {
             Array.Reverse(vals);
             for (int i = 0; i < 5; i++) {
                 ranks[i] = new Rank { Value = vals[i] };
+            }
+            return ranks;
+        }
+
+        public static Rank[] DecodeLow(byte encoded) {
+            // decode the bijective mapping for low hand indices (0 -> ACE, 1.. -> TWO..)
+            byte[] vals = Combinatorics.BijectiveMapping.Decode(encoded, 5);
+            var ranks = new Rank[5];
+            for (int i = 0; i < vals.Length; i++) {
+                byte v = vals[i];
+                if (v == 0) {
+                    ranks[i] = Rank.ACE;
+                }
+                else {
+                    ranks[i] = new Rank(v - 1);
+                }
             }
             return ranks;
         }
