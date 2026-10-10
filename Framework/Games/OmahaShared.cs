@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace Framework.Games
 {
     internal static class OmahaShared {
-        public static HighHand MakeHighHand(Card[] board, Card[] holeCards) {
-            HighHand best = HighHand.Min;
+        public static ushort MakeHighHand(Card[] board, Card[] holeCards) {
+            ushort best = 0;
 
-            foreach (HighHand hand in GetHighHands(board, holeCards))
-                best = HighHand.Max(best, hand);
+            foreach (ushort hand in GetHighHands(board, holeCards))
+                best = Math.Max(best, hand);
 
             return best;
         }
@@ -25,8 +25,8 @@ namespace Framework.Games
             return bestLow;
         }
 
-        private static IEnumerable<HighHand> GetHighHands(Card[] board, Card[] holeCards) {
-            return GetCards(board, holeCards).Select(cards => HighHand.Build(new FiveCards(cards)));
+        private static IEnumerable<ushort> GetHighHands(Card[] board, Card[] holeCards) {
+            return GetCards(board, holeCards).Select(cards => LookupTable.Lookup(new FiveCards(cards)));
         }
 
         private static IEnumerable<LowHand> GetLowHands(Card[] board, Card[] holeCards) {

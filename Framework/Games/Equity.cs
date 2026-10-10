@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Framework.Games {
     internal static class Equity {
-        public static Rational[] CalculateHigh(Card[] partialBoard, Card[][] holeCards, Func<Card[], Card[], HighHand> makeHand) {
+        public static Rational[] CalculateHigh(Card[] partialBoard, Card[][] holeCards, Func<Card[], Card[], ushort> makeHand) {
             Card[] deck = Deck.Build(holeCards, partialBoard);
             Rational[] wins = Enumerable.Range(start: 0, count: holeCards.Length)
                 .Select(_ => Rational.Zero)
@@ -48,12 +48,12 @@ namespace Framework.Games {
             return wins.Select(i => i / count).ToArray();
         }
 
-        private static Rational[] GetWinsHigh(Card[] fullBoard, Card[][] holeCards, Func<Card[], Card[], HighHand> makeHand) {
+        private static Rational[] GetWinsHigh(Card[] fullBoard, Card[][] holeCards, Func<Card[], Card[], ushort> makeHand) {
             HashSet<int> winners = new();
-            HighHand bestHand = HighHand.Min;
+            ushort bestHand = 0;
 
             for (int i = 0; i < holeCards.Length; i++) {
-                HighHand currentHand = makeHand(fullBoard, holeCards[i]);
+                ushort currentHand = makeHand(fullBoard, holeCards[i]);
                 if (currentHand > bestHand) {
                     bestHand = currentHand;
                     winners.Clear();

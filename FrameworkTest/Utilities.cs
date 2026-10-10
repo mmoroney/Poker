@@ -33,7 +33,7 @@ namespace FrameworkTest {
         private static readonly Rank[] straightRanks = allRanks.Where(r => r.Value >= Rank.FIVE.Value).ToArray();
         private static readonly Rank[] lowRanks = allRanks.Where(r => r.IsLowRank()).ToArray();
 
-        public static HighHand MakeOnePair() {
+        public static ushort MakeOnePair() {
             Rank[] ranks = ChooseRandom(allRanks, 4);
             Card[] cards = new Card[5];
 
@@ -46,10 +46,10 @@ namespace FrameworkTest {
                 cards[i] = new Card(ranks[i - 1], ChooseRandom(allSuits));
             }
 
-            return HighHand.Build(new FiveCards(cards));
+            return LookupTable.Lookup(new FiveCards(cards));
         }
 
-        public static HighHand MakeTwoPair() {
+        public static ushort MakeTwoPair() {
             Rank[] ranks = ChooseRandom(allRanks, 3);
             Card[] cards = new Card[5];
 
@@ -64,10 +64,10 @@ namespace FrameworkTest {
 
             cards[4] = new Card(ranks[2], ChooseRandom(allSuits));
 
-            return HighHand.Build(new FiveCards(cards));
+            return LookupTable.Lookup(new FiveCards(cards));
         }
 
-        public static HighHand MakeThreeOfAKind() {
+        public static ushort MakeThreeOfAKind() {
             Rank[] ranks = ChooseRandom(allRanks, 3);
             Card[] cards = new Card[5];
 
@@ -79,10 +79,10 @@ namespace FrameworkTest {
             cards[3] = new Card(ranks[1], ChooseRandom(allSuits));
             cards[4] = new Card(ranks[2], ChooseRandom(allSuits));
 
-            return HighHand.Build(new FiveCards(cards));
+            return LookupTable.Lookup(new FiveCards(cards));
         }
 
-        public static HighHand MakeFullHouse() {
+        public static ushort MakeFullHouse() {
             Rank[] ranks = ChooseRandom(allRanks, 2);
             Card[] cards = new Card[5];
 
@@ -95,10 +95,10 @@ namespace FrameworkTest {
                 cards[i] = new Card(ranks[1], suits[i]);
             }
 
-            return HighHand.Build(new FiveCards(cards));
+            return LookupTable.Lookup(new FiveCards(cards));
         }
 
-        public static HighHand MakeFourOfAKind() {
+        public static ushort MakeFourOfAKind() {
             Rank[] ranks = ChooseRandom(allRanks, 2);
             Card[] cards = new Card[5];
             for (int i = 0; i < 4; i++) {
@@ -106,10 +106,10 @@ namespace FrameworkTest {
             }
 
             cards[4] = new Card(ranks[1], ChooseRandom(allSuits));
-            return HighHand.Build(new FiveCards(cards));
+            return LookupTable.Lookup(new FiveCards(cards));
         }
 
-        public static HighHand MakeStraightFlush() {
+        public static ushort MakeStraightFlush() {
             Suit suit = ChooseRandom(allSuits);
             Rank rank = ChooseRandom(straightRanks);
 
@@ -122,7 +122,7 @@ namespace FrameworkTest {
                 cards[i] = new Card(new Rank(value), suit);
             }
 
-            return HighHand.Build(new FiveCards(cards));
+            return LookupTable.Lookup(new FiveCards(cards));
         }
 
         public static LowHand MakeLowHand() {

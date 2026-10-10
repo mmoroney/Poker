@@ -26,11 +26,11 @@ namespace FrameworkTest
                 {
                     for (int j = i + 1; j < types.Length; j++)
                     {
-                        HighHand hand1 = MakeHighHand(types[i]);
-                        Assert.AreEqual(types[i], hand1.HandType);
+                        ushort hand1 = MakeHighHand(types[i]);
+                        Assert.AreEqual(types[i], Decoder.Decode(hand1).HandType);
 
-                        HighHand hand2 = MakeHighHand(types[j]);
-                        Assert.AreEqual(types[j], hand2.HandType);
+                        ushort hand2 = MakeHighHand(types[j]);
+                        Assert.AreEqual(types[j], Decoder.Decode(hand2).HandType);
 
                         Assert.IsTrue(hand2 > hand1);
                     }
@@ -38,7 +38,7 @@ namespace FrameworkTest
             }
         }
 
-        private static HighHand MakeHighHand(HandType type)
+        private static ushort MakeHighHand(HandType type)
         {
             if (type == HandType.OnePair) return Utilities.MakeOnePair();
             if (type == HandType.TwoPair) return Utilities.MakeTwoPair();
@@ -260,16 +260,16 @@ namespace FrameworkTest
 
         private static void TestHand(Card card1, Card card2, Card card3, Card card4, Card card5, HandType handType)
         {
-            HighHand hand = HighHand.Build(new FiveCards(new Card[] { card1, card2, card3, card4, card5 }));
-            Assert.AreEqual(handType, hand.HandType);
+            ushort hand = LookupTable.Lookup(new FiveCards(new Card[] { card1, card2, card3, card4, card5 }));
+            Assert.AreEqual(handType, Decoder.Decode(hand).HandType);
         }
 
         private static void TestUnequalHandComparison(Card[] hand1, Card[] hand2)
         {
-            HighHand a = HighHand.Build(new FiveCards(hand1));
-            HighHand b = HighHand.Build(new FiveCards(hand2));
+            ushort hand1Value = LookupTable.Lookup(new FiveCards(hand1));
+            ushort hand2Value = LookupTable.Lookup(new FiveCards(hand2));
 
-            Assert.IsTrue(a > b);
+            Assert.IsTrue(hand1Value > hand2Value);
         }
     }
 }

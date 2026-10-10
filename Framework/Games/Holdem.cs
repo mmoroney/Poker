@@ -13,14 +13,14 @@ namespace Framework.Games
             return Equity.CalculateHigh(Parser.ParsePartialBoard(partialBoard), holeCardsParsed, MakeHoldemHand);
         }
 
-        private static HighHand MakeHoldemHand(Card[] board, Card[] holeCards) {
-            HighHand best = HighHand.Min;
+        private static ushort MakeHoldemHand(Card[] board, Card[] holeCards) {
+            ushort best = 0;
 
             Card[] source = board.Concat(holeCards).ToArray();
             Card[] dest = new Card[5];
 
             foreach (Card[] cards in Chooser.Choose(source, dest))
-                best = HighHand.Max(best, HighHand.Build(new FiveCards(cards)));
+                best = Math.Max(best, LookupTable.Lookup(new FiveCards(cards)));
 
             return best;
         }
