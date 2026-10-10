@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Combinatorics.Tests", "Comb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateFiveCard", "GenerateFiveCard\GenerateFiveCard.csproj", "{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquityCalculator", "EquityCalculator\EquityCalculator.csproj", "{91979F9A-CCEC-4F4E-A213-0F6388B0D898}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Release|x64.Build.0 = Release|Any CPU
 		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Release|x86.ActiveCfg = Release|Any CPU
 		{CC13B555-FD94-4432-A1EA-EC82BE7F9AF9}.Release|x86.Build.0 = Release|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Debug|x64.Build.0 = Debug|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Debug|x86.Build.0 = Debug|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Release|x64.ActiveCfg = Release|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Release|x64.Build.0 = Release|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Release|x86.ActiveCfg = Release|Any CPU
+		{91979F9A-CCEC-4F4E-A213-0F6388B0D898}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

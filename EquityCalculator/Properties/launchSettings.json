@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "EquityCalculator": {
+      "commandName": "Project",
+      "commandLineArgs": "--hands \"KcQdJh8s8c,AsAh2h3d3c\" --board \"AcTs9h\""
+    }
+  }
+}

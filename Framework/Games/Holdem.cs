@@ -14,7 +14,7 @@ namespace Framework.Games
         }
 
         private static ushort MakeHoldemHand(Card[] board, Card[] holeCards) {
-            ushort best = 0;
+             ushort best = 0;
 
             Card[] source = board.Concat(holeCards).ToArray();
             foreach (Card[] cards in Chooser.Choose(source, 5))
